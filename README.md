@@ -61,14 +61,14 @@ npm start
 cd backend
 ```
 2- Install required packages (if not already installed):
-
+```sh
 npm install morgan
 npm install uniqid
-
-3- npm start
-
+```
+3- start the server
+```sh
 npm start
-
+```
 ##  Project Structure
 
 The project's directory structure is as follows:
@@ -80,7 +80,11 @@ For more details about the project's structure and how it works, refer to the RE
 ## Screenshots
 
 PhotoLabs Home Page
+![Photo 1](https://raw.githubusercontent.com/Aasemaaneh/photolabs-starter/76012855a6af4155ff51aafc1a2023d0cd5be086/docs/homepage.jpg)
+
+
 PhotoLabs Modal View
+![Photo 2](https://raw.githubusercontent.com/Aasemaaneh/photolabs-starter/76012855a6af4155ff51aafc1a2023d0cd5be086/docs/modal.png)
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to help improve PhotoLabs. For major changes, please discuss them in the issues section before submitting a pull request.
