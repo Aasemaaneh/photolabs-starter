@@ -1,21 +1,43 @@
-import React from "react";
+import React from 'react';
+import PhotoFavButton from './PhotoFavButton';
+import '../styles/PhotoListItem.scss';
 
-import "../styles/PhotoListItem.scss";
-
-
-const sampleDataForPhotoListItem = {
-  id: "1",
-  location: {
-    city: "Montreal",
-    country: "Canada",
-  },
-  imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  username: "Joe Example",
-  profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-};
-
-const PhotoListItem = () => {
-  /* Insert React */
+const PhotoListItem = (props) => {
+  return (
+    <div
+      className="photo-list__item"
+      key={props.photo.id}
+      onClick={props.onClick} 
+    >
+      <PhotoFavButton
+        isLiked={props.isLiked}
+        toggleLike={props.toggleLike}
+        alert={props.alert}
+        setAlert={props.setAlert}
+        id={props.photo.id}
+      />
+      <div className="photo-list__image-container" key={props.photo.id}>
+        <img
+          src={props.imageSource}
+          alt={`Photo by ${props.username}`}
+          className="photo-list__image"
+        />
+      </div>
+      <div className="photo-list__user-details">
+        <div className="photo-list__user-info">
+          <img
+            src={props.profile}
+            alt={`Profile of ${props.username}`}
+            className="photo-list__user-profile"
+          />
+          <p>{props.username}</p>
+        </div>
+        <p className="photo-list__user-location">
+          {`${props.location.city}, ${props.location.country}`}
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default PhotoListItem;
