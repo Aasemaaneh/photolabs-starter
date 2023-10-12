@@ -5,7 +5,7 @@ import '../styles/HomeRoute.scss';
 import PhotoDetailsModal from './PhotoDetailsModal';
 import useApplicationData, { ACTIONS } from '../hooks/useApplicationData';
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
   const {
     likedPhotos,
     alert,
@@ -20,7 +20,7 @@ const HomeRoute = () => {
     photoData,
     topicData,
     fetchPhotosByTopic,
-  } = useApplicationData();
+  } = props;
 
   // Function to handle adding a favorite photo
   const handleAddFavorite = (photoId) => {
@@ -31,7 +31,7 @@ const HomeRoute = () => {
   const handleRemoveFavorite = (photoId) => {
     toggleLike(photoId);
   };
-
+  console.log('homerout',likedPhotos);
   return (
     <div className="home-route">
       <TopNavBar
