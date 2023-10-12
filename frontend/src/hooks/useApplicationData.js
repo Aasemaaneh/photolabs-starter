@@ -113,28 +113,27 @@ const useApplicationData = () => {
   };
 
   useEffect(() => {
-    // Fetch all photos initially
-    fetch("/api/photos")
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos: transformPhotoData(data) } })
+    // Use Promise.all to fetch both photos and topics
+    Promise.all([
+      fetch("/api/photos").then((res) => res.json()),
+      fetch("/api/topics").then((response) => response.json())
+    ])
+      .then(([photosData, topicsData]) => {
+        // Dispatch the results to the reducer
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: { photos: transformPhotoData(photosData) }
+        });
+        dispatch({
+          type: ACTIONS.SET_TOPIC_DATA,
+          payload: { topics: topicsData }
+        });
       })
       .catch((error) => {
-        console.error("Error fetching all photos:", error);
+        console.error("Error fetching photos and topics:", error);
       });
   }, []);
-
-  useEffect(() => {
-    // Fetch topic data initially
-    fetch("/api/topics")
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { topics: data } });
-      })
-      .catch((error) => {
-        console.error("Error fetching topic data:", error);
-      });
-  }, []);
+  
 
   console.log('state', state);
   return {
