@@ -62,6 +62,7 @@ const HomeRoute = (props) => {
           openPhotoModal={openPhotoModal}
           onAddFavorite={handleAddFavorite}
           onRemoveFavorite={handleRemoveFavorite}
+          handlePhotoClick={handlePhotoClick}
         />
       )}
     </div>

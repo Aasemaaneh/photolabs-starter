@@ -50,7 +50,8 @@ const PhotoDetailsModal = (props) => {
           <div className="photo-details-modal__similar-photos">
             <h2 className="photo-details-modal__header">Similar Photos</h2>
             <PhotoList
-              photos={props.selectedPhotoData.similarPhotos}             
+              photos={props.selectedPhotoData.similarPhotos}
+              handlePhotoClick={props.handlePhotoClick} 
               alert={props.alert}
               setAlert={[]}
               isLiked={(photoId) => props.isLiked(photoId)}
