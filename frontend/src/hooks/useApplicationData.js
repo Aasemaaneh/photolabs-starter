@@ -88,7 +88,7 @@ const useApplicationData = () => {
   const openPhotoModal = (id, photoData) => {
     const selectedPhoto = state.photoData.find((photo) => photo.id === id);
     const similarPhotosData = selectedPhoto.similarPhotoIds || [];
-    console.log('similarphoto and selected', [selectedPhoto, similarPhotosData]);
+    // console.log('similarphoto and selected', [selectedPhoto, similarPhotosData]);
     // Dispatch action to select a photo and display details
     dispatch({
       type: ACTIONS.SELECT_PHOTO,
@@ -135,7 +135,7 @@ const useApplicationData = () => {
   }, []);
   
 
-  console.log('state', state);
+  // console.log('state', state);
   return {
     ...state,
     toggleLike,

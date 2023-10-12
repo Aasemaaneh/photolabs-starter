@@ -31,7 +31,7 @@ const HomeRoute = (props) => {
   const handleRemoveFavorite = (photoId) => {
     toggleLike(photoId);
   };
-  console.log('homerout',likedPhotos);
+ 
   return (
     <div className="home-route">
       <TopNavBar
