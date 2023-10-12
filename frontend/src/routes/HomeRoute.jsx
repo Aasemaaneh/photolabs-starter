@@ -47,6 +47,8 @@ const HomeRoute = (props) => {
         toggleLike={toggleLike}
         openPhotoModal={openPhotoModal}
         handlePhotoClick={handlePhotoClick}
+        onAddFavorite={handleAddFavorite}
+        onRemoveFavorite={handleRemoveFavorite}
       />
       {modalVisible && selectedPhotoId !== null && (
         <PhotoDetailsModal

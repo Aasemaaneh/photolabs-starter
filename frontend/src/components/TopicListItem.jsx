@@ -9,10 +9,8 @@ const TopicListItem = (props) => {
 
   return (
     <div className="topic-list__item">
-      <a href={props.slug} key={props.id} onClick={topicHandler}>
-        {props.title}
-      </a>
-    </div>
+            <span onClick={topicHandler}>{props.title}</span>
+        </div>
   );
 };
 
