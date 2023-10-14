@@ -4,7 +4,7 @@ import "../styles/TopicListItem.scss";
 const TopicListItem = (props) => {
   const topicHandler = () => {
     props.fetchPhotosByTopic(props.id);
-    // console.log('topicid',props.id);
+    
   };
 
   return (

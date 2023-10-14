@@ -1,10 +1,10 @@
 import { useReducer, useEffect } from "react";
 import reducer, { ACTIONS } from "./reducer"; // Import the reducer
 
-// Initializing
+// Initializing the application data
 const useApplicationData = () => {
   const initialState = {
-    photoData: [], // Placeholder for photo data
+    photoData: [],            // Placeholder for photo data
     topicData: [],
     likedPhotos: [],
     alert: false,
@@ -17,7 +17,7 @@ const useApplicationData = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState); // Use the imported reducer
 
-  // Functions for managing data
+  // Function for structuring photo data
   const transformPhotoData = (photoData) => {
     return photoData.map((photo) => {
       return {
@@ -36,11 +36,12 @@ const useApplicationData = () => {
           name: photo.user.name,
           profile: photo.user.profile,
         },
-        similarPhotoIds: photo.similar_photos, // Example similar photo IDs
+        similarPhotoIds: photo.similar_photos,
       };
     });
   };
 
+  // Function for managing toggling likes on photos
   const toggleLike = (photoId) => {
     if (state.selectedPhotoId !== null) {
       // Check if a photo is already selected
@@ -60,14 +61,15 @@ const useApplicationData = () => {
         profile: selectedPhoto.user.profile,
         isLiked: state.likedPhotos.includes(selectedPhoto.id),
         alert: state.alert,
-        setAlert: () => {}, // You can pass a placeholder function here
-        setModalVisible: () => {}, // You can pass a placeholder function here
+        setAlert: () => {}, // Placeholder function
+        setModalVisible: () => {}, // Placeholder function
         similarPhotos: selectedPhoto.similarPhotoIds || [],
       };
       dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { id: photoId, photoData } });
     }
   };
 
+  // Function for handling clicking on a photo
   const handlePhotoClick = (id) => {
     const selectedPhoto = state.photoData.find((photo) => photo.id === id);
     const photoData = {
@@ -78,17 +80,17 @@ const useApplicationData = () => {
       profile: selectedPhoto.user.profile,
       isLiked: state.likedPhotos.includes(selectedPhoto.id),
       alert: state.alert,
-      setAlert: () => {}, // You can pass a placeholder function here
-      setModalVisible: () => {}, // You can pass a placeholder function here
+      setAlert: () => {}, // Placeholder function
+      setModalVisible: () => {}, // Placeholder function
       similarPhotos: selectedPhoto.similarPhotoIds || [],
     };
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { id, photoData } });
   };
 
+  // Function for opening the photo modal
   const openPhotoModal = (id, photoData) => {
     const selectedPhoto = state.photoData.find((photo) => photo.id === id);
     const similarPhotosData = selectedPhoto.similarPhotoIds || [];
-    // console.log('similarphoto and selected', [selectedPhoto, similarPhotosData]);
     // Dispatch action to select a photo and display details
     dispatch({
       type: ACTIONS.SELECT_PHOTO,
@@ -96,11 +98,13 @@ const useApplicationData = () => {
     });
   };
 
+  // Function for closing the photo modal
   const closeModal = () => {
     // Dispatch action to close the modal
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS });
   };
 
+  // Function for fetching photos by topic
   const fetchPhotosByTopic = (topicId) => {
     fetch(`/api/topics/photos/${topicId}`)
       .then((res) => res.json())
@@ -112,8 +116,8 @@ const useApplicationData = () => {
       });
   };
 
+  // Use a single useEffect to fetch photos and topics
   useEffect(() => {
-    // Use Promise.all to fetch both photos and topics
     Promise.all([
       fetch("/api/photos").then((res) => res.json()),
       fetch("/api/topics").then((response) => response.json())
@@ -133,9 +137,8 @@ const useApplicationData = () => {
         console.error("Error fetching photos and topics:", error);
       });
   }, []);
-  
 
-  // console.log('state', state);
+  // Return the state and functions for other components to use
   return {
     ...state,
     toggleLike,
